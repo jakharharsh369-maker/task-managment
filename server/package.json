@@ -21,6 +21,7 @@
     "dotenv": "^16.4.5",
     "express": "^5.1.0",
     "inngest": "^3.45.0",
+    "serialize-error-cjs": "^0.2.0",
     "ws": "^8.18.3"
   },
   "devDependencies": {
