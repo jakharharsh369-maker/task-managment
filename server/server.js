@@ -39,6 +39,9 @@ app.get("/", (req, res) => res.send("✅ Server is live and accessible!"));
 app.use("/api/inngest", serve({ client: inngest, functions }));
 
 // API routes
+app.get("/api/test", (req, res) => {
+  res.json({ message: "API is working 🎉" });
+});
 app.use("/api/workspaces", protect, workspaceRouter);
 app.use("/api/projects", protect, projectRouter);
 app.use("/api/tasks", protect, taskRouter);
