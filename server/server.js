@@ -9,6 +9,7 @@ import { protect } from "./middlewares/authmiddleware.js";
 import projectRouter from "./routes/projectRoutes.js";
 import taskRouter from "./routes/taskRoutes.js";
 import commentRouter from "./routes/commentRoutes.js";
+import { createServer } from "@vercel/node";
 
 // 🧩 DEBUG — Check if .env is loading correctly
 console.log("🔍 DEBUG: Checking environment variables...");
@@ -20,7 +21,7 @@ const app = express();
 // Clerk Middleware (handles auth)
 app.use(clerkMiddleware());
 
-// ✅ Allow requests from your React frontend
+// CORS
 app.use(
   cors({
     origin: ["http://localhost:5173", "http://localhost:3000"],
@@ -31,18 +32,21 @@ app.use(
 
 app.use(express.json());
 
-// Basic route to verify server is running
+// Basic test route
 app.get("/", (req, res) => res.send("✅ Server is live and accessible!"));
 
-// Inngest route for background jobs
+// Inngest route
 app.use("/api/inngest", serve({ client: inngest, functions }));
-//routes
+
+// API routes
 app.use("/api/workspaces", protect, workspaceRouter);
 app.use("/api/projects", protect, projectRouter);
 app.use("/api/tasks", protect, taskRouter);
 app.use("/api/comments", protect, commentRouter);
 
-// Start the server
-const PORT = process.env.PORT || 8080;
-// app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-export default app;
+// Vercel export
+export const config = {
+  runtime: "nodejs18.x",
+};
+
+export default createServer(app);
