@@ -9,7 +9,7 @@ import { protect } from "./middlewares/authmiddleware.js";
 import projectRouter from "./routes/projectRoutes.js";
 import taskRouter from "./routes/taskRoutes.js";
 import commentRouter from "./routes/commentRoutes.js";
-import { createServer } from "@vercel/node";
+import { createServer } from "@vercel/node"; // only once
 
 // 🧩 DEBUG — Check if .env is loading correctly
 console.log("🔍 DEBUG: Checking environment variables...");
@@ -44,9 +44,8 @@ app.use("/api/projects", protect, projectRouter);
 app.use("/api/tasks", protect, taskRouter);
 app.use("/api/comments", protect, commentRouter);
 
-// Vercel export
 export const config = {
-  runtime: "nodejs18.x",
+  runtime: "nodejs",
 };
 
 export default createServer(app);
