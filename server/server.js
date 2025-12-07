@@ -10,12 +10,6 @@ import projectRouter from "./routes/projectRoutes.js";
 import taskRouter from "./routes/taskRoutes.js";
 import commentRouter from "./routes/commentRoutes.js";
 
-
-// 🧩 DEBUG — Check if .env is loading correctly
-console.log("🔍 DEBUG: Checking environment variables...");
-console.log("CLERK_PUBLISHABLE_KEY:", process.env.CLERK_PUBLISHABLE_KEY);
-console.log("CLERK_SECRET_KEY:", process.env.CLERK_SECRET_KEY);
-
 const app = express();
 
 // Clerk Middleware (handles auth)
@@ -51,5 +45,6 @@ export const config = {
   runtime: "nodejs",
 };
 
-export default app;
+app.listen(4000, () => {});
 
+export default app;

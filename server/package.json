@@ -8,7 +8,7 @@
   "main": "server.js",
   "scripts": {
     "postinstall": "npx prisma generate",
-    "start": " prisma generate && nodeserver.js",
+    "start": "prisma generate && node server/server.js",
     "server": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
