@@ -1,8 +1,9 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { UserButton, SignedIn, SignedOut } from "@clerk/clerk-react";
+import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
-const Navbar = () => {
+
+const navbar = () => {
   const location = useLocation();
 
   const linkClasses = (path) =>
@@ -31,4 +32,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default navbar;
