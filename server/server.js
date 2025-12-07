@@ -37,12 +37,12 @@ app.get("/", (req, res) => res.send("✅ Server is live and accessible!"));
 // Inngest route for background jobs
 app.use("/api/inngest", serve({ client: inngest, functions }));
 //routes
-app.use("/api/workspaces", protect,workspaceRouter)
-app.use("/api/projects",protect,projectRouter)
+app.use("/api/workspaces", protect, workspaceRouter);
+app.use("/api/projects", protect, projectRouter);
 app.use("/api/tasks", protect, taskRouter);
 app.use("/api/comments", protect, commentRouter);
 
-
 // Start the server
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+export default app;
