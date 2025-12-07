@@ -2,8 +2,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
 
-
-const navbar = () => {
+const Navbar = () => {
   const location = useLocation();
 
   const linkClasses = (path) =>
@@ -32,4 +31,4 @@ const navbar = () => {
   );
 };
 
-export default navbar;
+export default Navbar;

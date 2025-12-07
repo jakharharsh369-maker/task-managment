@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Footer from "../Components/Footer";
 import Sidebar from "../Components/Sidebar";
 import { useUser } from "@clerk/clerk-react";
-import Navbar from "../Components/navbar.jsx";
+import Navbar from "../Components/Navbar.jsx";
 
 const Layout = () => {
   const { isLoaded } = useUser();
