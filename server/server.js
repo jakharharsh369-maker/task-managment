@@ -4,6 +4,11 @@ import "dotenv/config";
 import { serve } from "inngest/express";
 import { inngest, functions } from "./inngest/index.js";
 import { clerkMiddleware } from "@clerk/express";
+import workspaceRouter from "./routes/workspaceRoutes.js";
+import { protect } from "./middlewares/authmiddleware.js";
+import projectRouter from "./routes/projectRoutes.js";
+import taskRouter from "./routes/taskRoutes.js";
+import commentRouter from "./routes/commentRoutes.js";
 
 // 🧩 DEBUG — Check if .env is loading correctly
 console.log("🔍 DEBUG: Checking environment variables...");
@@ -31,6 +36,12 @@ app.get("/", (req, res) => res.send("✅ Server is live and accessible!"));
 
 // Inngest route for background jobs
 app.use("/api/inngest", serve({ client: inngest, functions }));
+//routes
+app.use("/api/workspaces", protect,workspaceRouter)
+app.use("/api/projects",protect,projectRouter)
+app.use("/api/tasks", protect, taskRouter);
+app.use("/api/comments", protect, commentRouter);
+
 
 // Start the server
 const PORT = process.env.PORT || 8080;

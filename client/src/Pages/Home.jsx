@@ -1,20 +1,44 @@
-import React from "react";
-import Navbar from "../Components/navbar";
-import Footer from "../Components/Footer";
+import { useState } from "react";
+import { useProjectStore } from "../Store/Projectstore";
 
-const Home = () => {
+export default function Home() {
+  const addProject = useProjectStore((state) => state.addProject);
+  const [project, setProject] = useState({ name: "", description: "" });
+
+  const handleAdd = () => {
+    if (!project.name.trim()) return;
+    addProject(project);
+    setProject({ name: "", description: "" });
+  };
+
   return (
-    <div className="flex flex-col min-h-screen bg-white text-gray-900">
-      <Navbar />
-      <main className="flex-grow flex flex-col items-center justify-center text-center px-6">
-        <h1 className="text-4xl font-bold mb-4">Welcome to TaskFlow</h1>
-        <p className="text-gray-600 max-w-md">
-          Stay organized, manage tasks, and get more done — all in one place.
-        </p>
-      </main>
-      <Footer />
+    <div className="p-4 max-w-lg mx-auto space-y-4">
+      <h1 className="text-2xl font-semibold">Add Project</h1>
+      
+
+      <input
+        type="text"
+        placeholder="Project name"
+        value={project.name}
+        onChange={(e) => setProject({ ...project, name: e.target.value })}
+        className="w-full border px-3 py-2"
+      />
+
+      <textarea
+        placeholder="Description"
+        value={project.description}
+        onChange={(e) =>
+          setProject({ ...project, description: e.target.value })
+        }
+        className="w-full border px-3 py-2"
+      />
+
+      <button
+        onClick={handleAdd}
+        className="bg-blue-600 text-white px-4 py-2 rounded"
+      >
+        Add Project
+      </button>
     </div>
   );
-};
-
-export default Home;
+}

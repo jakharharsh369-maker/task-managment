@@ -16,15 +16,7 @@ const Navbar = () => {
     <nav className="w-full bg-white shadow-md px-6 py-4 flex items-center justify-between transition">
       <h1 className="text-2xl font-bold text-gray-900">TaskFlow</h1>
 
-      <div className="flex items-center space-x-4">
-        <Link to="/home" className={linkClasses("/home")}>
-          Home
-        </Link>
-
-        <Link to="/app/tasks" className={linkClasses("/app/tasks")}>
-          Task Status
-        </Link>
-
+      <div className="flex items-center gap-4">
         <SignedIn>
           <UserButton afterSignOutUrl="/sign-in" />
         </SignedIn>
