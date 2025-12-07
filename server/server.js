@@ -9,7 +9,7 @@ import { protect } from "./middlewares/authMiddleware.js";
 import projectRouter from "./routes/projectRoutes.js";
 import taskRouter from "./routes/taskRoutes.js";
 import commentRouter from "./routes/commentRoutes.js";
-import { createServer } from "@vercel/node"; // only once
+
 
 // 🧩 DEBUG — Check if .env is loading correctly
 console.log("🔍 DEBUG: Checking environment variables...");
@@ -51,4 +51,5 @@ export const config = {
   runtime: "nodejs",
 };
 
-export default createServer(app);
+export default app;
+
