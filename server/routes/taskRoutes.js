@@ -1,9 +1,16 @@
-import express from "express"
-import { createTask, deleteTask, updateTask } from "../Controller/taskController.js"
+import express from "express";
+import {
+  createTask,
+  deleteTask,
+  updateTask,
+  completeTask,
+} from "../Controller/taskController.js";
 
-const taskRouter = express.Router()
+const taskRouter = express.Router();
 
-taskRouter.post('/',createTask)
+taskRouter.post("/", createTask);
 taskRouter.put("/:id", updateTask);
 taskRouter.post("/delete", deleteTask);
-export default taskRouter
+taskRouter.patch("/:id/complete", completeTask);
+
+export default taskRouter;

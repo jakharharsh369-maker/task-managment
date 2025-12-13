@@ -110,6 +110,47 @@ export const updateTask = async (req, res) => {
   }
 }
 
+// Mark task as completed
+export const completeTask = async (req, res) => {
+  try {
+    const { userId } = await req.auth();
+
+    const task = await prisma.task.findUnique({
+      where: { id: req.params.id },
+    });
+
+    if (!task) {
+      return res.status(404).json({ message: "Task not found" });
+    }
+
+    const project = await prisma.project.findUnique({
+      where: { id: task.projectId },
+      include: { members: { include: { user: true } } },
+    });
+
+    if (!project) {
+      return res.status(404).json({ message: "Project not found" });
+    }
+
+    if (project.team_lead !== userId) {
+      return res.status(403).json({
+        message: "You don't have admin privileges for this project",
+      });
+    }
+
+    const updatedTask = await prisma.task.update({
+      where: { id: req.params.id },
+      data: { status: "COMPLETED" },
+    });
+
+    res.json({ task: updatedTask, message: "Task marked as completed" });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: error.code || error.message });
+  }
+};
+
+
 //delete task
 export const deleteTask = async (req, res) => {
   try {

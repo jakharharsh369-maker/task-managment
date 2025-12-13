@@ -15,6 +15,13 @@ export const useProjectStore = create(
         set((state) => ({
           projects: state.projects.filter((p) => p.id !== id),
         })),
+
+      markComplete: (id) =>
+        set((state) => ({
+          projects: state.projects.map((p) =>
+            p.id === id ? { ...p, status: "Completed" } : p
+          ),
+        })),
     }),
     {
       name: "projects-storage", // key for localStorage

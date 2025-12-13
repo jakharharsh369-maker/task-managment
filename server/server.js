@@ -44,7 +44,11 @@ app.use("/api/comments", protect, commentRouter);
 export const config = {
   runtime: "nodejs",
 };
+const PORT = process.env.PORT || 8080;
 
-app.listen(4000, () => {});
+app.listen(PORT, () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
+
 
 export default app;

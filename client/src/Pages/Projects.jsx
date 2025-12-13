@@ -5,6 +5,7 @@ import CreateProjectDialog from "../Components/CreateProjectDialog";
 export default function Projects() {
   const projects = useProjectStore((state) => state.projects);
   const removeProject = useProjectStore((state) => state.removeProject);
+  const markComplete = useProjectStore((state) => state.markComplete);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   return (
@@ -21,7 +22,9 @@ export default function Projects() {
 
       {/* Projects List */}
       {projects.length === 0 ? (
-        <p className="text-black-100 text-center py-10 font-bold ">No projects found.</p>
+        <p className="text-black-100 text-center py-10 font-bold ">
+          No projects found.
+        </p>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((project) => (
@@ -40,6 +43,25 @@ export default function Projects() {
               >
                 Delete
               </button>
+
+              <button
+                onClick={() => markComplete(project.id)}
+                className="ml-2 bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded text-sm"
+              >
+                Complete
+              </button>
+              <p className="text-sm font-medium">
+                Status:{" "}
+                <span
+                  className={
+                    project.status === "Completed"
+                      ? "text-green-600"
+                      : "text-yellow-600"
+                  }
+                >
+                  {project.status || "Pending"}
+                </span>
+              </p>
             </div>
           ))}
         </div>
