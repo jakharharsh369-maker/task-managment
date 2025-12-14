@@ -1,0 +1,39 @@
+/* Inner container */
+.inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--mantine-spacing-xl) var(--mantine-spacing-md);
+
+  display: flex;
+  flex-direction: row;      
+  justify-content: space-between;
+  align-items: center;           
+}
+
+/* Links container */
+.links {
+  display: flex;
+  gap: 32px;
+}
+
+/* Optional: link color for dark bg */
+.links a {
+  color: var(--mantine-color-gray-4);
+}
+
+.links a:hover {
+  color: rgb(252, 252, 252);
+}
+
+/* Mobile */
+@media (max-width: var(--mantine-breakpoint-sm)) {
+  .inner {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--mantine-spacing-xl);
+  }
+  .links {
+    flex-wrap: wrap;
+    gap: var(--mantine-spacing-md);
+  }
+}

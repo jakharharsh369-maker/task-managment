@@ -1,13 +1,35 @@
-import React from "react";
+import { Anchor, Container, Group } from "@mantine/core";
 
-const Footer = () => {
+import classes from "../css/FooterSimple.module.css";
+
+const links = [
+  { link: "#", label: "Contact" },
+  { link: "#", label: "Privacy" },
+  { link: "#", label: "Blog" },
+  { link: "#", label: "Careers" },
+];
+
+function FooterSimple() {
+  const items = links.map((link) => (
+    <Anchor
+      c="dimmed"
+      key={link.label}
+      href={link.link}
+      onClick={(event) => event.preventDefault()}
+      size="sm"
+    >
+      {link.label}
+    </Anchor>
+  ));
+
   return (
-    <footer className="w-full bg-gray-100 text-center py-4 border-t">
-      <p className="text-gray-600 text-sm">
-        © {new Date().getFullYear()} TaskFlow. All rights reserved.
-      </p>
-    </footer>
+    <div className={classes.footer}>
+      <Container className={classes.inner}>
+        <h3 className="font-semibold">TaskFlow</h3>
+        <Group className={classes.links}>{items}</Group>
+      </Container>
+    </div>
   );
-};
+}
 
-export default Footer;
+export default FooterSimple;

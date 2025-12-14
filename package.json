@@ -1,5 +1,27 @@
 {
   "dependencies": {
+    "@mantine/carousel": "^8.3.10",
+    "@mantine/charts": "^8.3.10",
+    "@mantine/code-highlight": "^8.3.10",
+    "@mantine/core": "^8.3.10",
+    "@mantine/dates": "^8.3.10",
+    "@mantine/dropzone": "^8.3.10",
+    "@mantine/form": "^8.3.10",
+    "@mantine/hooks": "^8.3.10",
+    "@mantine/modals": "^8.3.10",
+    "@mantine/notifications": "^8.3.10",
+    "@mantine/nprogress": "^8.3.10",
+    "@mantine/spotlight": "^8.3.10",
+    "@mantine/tiptap": "^8.3.10",
+    "@tabler/icons-react": "^3.35.0",
+    "@tiptap/extension-link": "^3.13.0",
+    "@tiptap/pm": "^3.13.0",
+    "@tiptap/react": "^3.13.0",
+    "@tiptap/starter-kit": "^3.13.0",
+    "dayjs": "^1.11.19",
+    "embla-carousel": "^8.6.0",
+    "embla-carousel-react": "^8.6.0",
+    "recharts": "^3.5.1",
     "serverless-http": "^4.0.0"
   }
 }

@@ -1,34 +1,82 @@
-import React from "react";
-import { Link, useLocation } from "react-router-dom";
-import { SignedIn, SignedOut, UserButton } from "@clerk/clerk-react";
+import {
+  IconGauge,
+  IconHome2,
+  IconLogout,
 
-const Navbar = () => {
+} from "@tabler/icons-react";
+import { Tooltip, UnstyledButton } from "@mantine/core";
+import { useNavigate, useLocation } from "react-router-dom";
+import { useClerk } from "@clerk/clerk-react";
+
+
+
+
+import WorkspaceDropdown from "./WorkspaceDropdown";
+import classes from "../css/NavbarMinimal.module.css";
+
+function NavbarLink({ icon: Icon, label, active, onClick }) {
+  return (
+    <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
+      <UnstyledButton
+        onClick={onClick}
+        className={classes.link}
+        data-active={active || undefined}
+      >
+        <Icon size={20} stroke={1.5} />
+      </UnstyledButton>
+    </Tooltip>
+  );
+}
+
+const navItems = [
+  { icon: IconHome2, label: "Home", path: "/home" },
+  { icon: IconGauge, label: "Projects", path: "/projects" },
+];
+
+function NavbarMinimal() {
+  const navigate = useNavigate();
   const location = useLocation();
-
-  const linkClasses = (path) =>
-    `px-4 py-2 rounded-md font-medium transition ${
-      location.pathname === path
-        ? "bg-black text-white"
-        : "text-gray-700 hover:bg-gray-200"
-    }`;
+  const { signOut } = useClerk();
 
   return (
-    <nav className="w-full bg-white shadow-md px-6 py-4 flex items-center justify-between transition">
-      <h1 className="text-2xl font-bold text-gray-900">TaskFlow</h1>
+    <nav className={classes.navbar}>
+      {/* Logo */}
+      <div className="flex justify-center py-3">
+        <h1 className="font-semibold">TaskFlow</h1>
+      </div>
 
-      <div className="flex items-center gap-4">
-        <SignedIn>
-          <UserButton afterSignOutUrl="/sign-in" />
-        </SignedIn>
+      {/* Workspace dropdown */}
+      <WorkspaceDropdown />
 
-        <SignedOut>
-          <Link to="/sign-in" className={linkClasses("/sign-in")}>
-            Sign In
-          </Link>
-        </SignedOut>
+      {/* Main navigation */}
+      <div className={classes.navbarMain}>
+        <div className="flex flex-col items-center gap-1">
+          {navItems.map((item) => {
+            const isActive = location.pathname === item.path;
+
+            return (
+              <NavbarLink
+                key={item.label}
+                icon={item.icon}
+                label={item.label}
+                active={isActive}
+                onClick={() => navigate(item.path)}
+              />
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Bottom actions */}
+      <div className="flex flex-col items-center gap-1 pb-3">
+        <NavbarLink
+          icon={IconLogout}
+          label="Logout"
+          onClick={() => signOut()}
+        />
       </div>
     </nav>
   );
-};
+}
 
-export default Navbar;
+export default NavbarMinimal;

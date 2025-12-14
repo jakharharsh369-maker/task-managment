@@ -3,6 +3,7 @@ import { ChevronDown, Check, Plus } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCurrentWorkspace } from "../features/workspaceSlice";
 import { useNavigate } from "react-router-dom";
+
 import {
   useClerk,
   useOrganizationList,
@@ -31,7 +32,7 @@ function WorkspaceDropdown() {
 
   const onSelectWorkspace = async (organizationId) => {
     await setActive({ organization: organizationId });
-    dispatch(setCurrentWorkspace(organizationId)); // optional but good for persistence
+    dispatch(setCurrentWorkspace(organizationId)); 
     setIsOpen(false);
     navigate("/");
   };
@@ -73,12 +74,12 @@ function WorkspaceDropdown() {
             <p className="font-semibold text-gray-800 dark:text-white text-sm truncate">
               {activeOrgFromClerk?.name || "Select Workspace"}
             </p>
-            <p className="text-xs text-gray-500 dark:text-zinc-400 truncate">
+            {/* <p className="text-xs text-gray-500 dark:text-zinc-400 truncate">
               {workspaces.length} workspace{workspaces.length !== 1 ? "s" : ""}
-            </p>
+            </p> */}
           </div>
         </div>
-        <ChevronDown className="w-4 h-4 text-gray-500 dark:text-zinc-400 flex-shrink-0" />
+        <ChevronDown className="w-4 h-4 text-gray-500 dark:text-zinc-400 flex-shrink-" />
       </button>
 
       {isOpen && (

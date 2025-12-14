@@ -1,10 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+
 import { ClerkProvider } from "@clerk/clerk-react";
 import { BrowserRouter, useNavigate } from "react-router-dom";
-import { Provider } from "react-redux"; 
-import Store from "./Store/store.jsx"; 
+import { Provider } from "react-redux";
+import { MantineProvider } from "@mantine/core";
+import "@mantine/core/styles.css";
+
+import Store from "./Store/store.jsx";
 import "./style.css";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -15,6 +19,7 @@ if (!PUBLISHABLE_KEY) {
 
 function ClerkWithRouter() {
   const navigate = useNavigate();
+
   return (
     <ClerkProvider
       publishableKey={PUBLISHABLE_KEY}
@@ -28,9 +33,11 @@ function ClerkWithRouter() {
 function Root() {
   return (
     <BrowserRouter>
-      
       <Provider store={Store}>
-        <ClerkWithRouter />
+        {/* MantineProvider MUST wrap components using Mantine */}
+        <MantineProvider>
+          <ClerkWithRouter />
+        </MantineProvider>
       </Provider>
     </BrowserRouter>
   );

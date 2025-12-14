@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.53.8",
+    "@mantine/core": "^8.3.10",
+    "@mantine/hooks": "^8.3.10",
     "@reduxjs/toolkit": "^2.11.0",
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.2",

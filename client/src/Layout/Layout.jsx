@@ -1,33 +1,32 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "../Components/Footer";
-import Sidebar from "../Components/Sidebar";
 import { useUser } from "@clerk/clerk-react";
-import Navbar from "../Components/Navbar.jsx";
+
+import NavbarMinimal from "../Components/Navbar.jsx";
+import FooterSimple from "../Components/Footer";
 
 const Layout = () => {
   const { isLoaded } = useUser();
 
-  if (!isLoaded) {
-    return (
-      <div className="h-screen flex items-center justify-center">
-        Loading...
-      </div>
-    );
-  }
-
   return (
-    <div className="flex bg-white text-gray-900 min-h-screen">
-      {/* Sidebar always on the left */}
-      <Sidebar className="w-60 fixed h-full" />
+    <div className="flex h-screen w-screen overflow-hidden">
+      {/* LEFT SIDEBAR */}
+      <NavbarMinimal />
 
-      {/* Main screen area shifted right by sidebar width */}
-      <div className="flex flex-col flex-1 ml-60 min-h-screen">
-        <Navbar />
-        <main className="flex-grow p-4">
-          <Outlet />
+      {/* RIGHT CONTENT */}
+      <div className="flex flex-col flex-1 overflow-hidden">
+        <main className="flex-1 overflow-y-auto p-6">
+          {!isLoaded ? (
+            <div className="h-full flex items-center justify-center">
+              Loading...
+            </div>
+          ) : (
+            <Outlet />
+          )}
         </main>
-        <Footer />
+
+        {/* FOOTER */}
+        <FooterSimple />
       </div>
     </div>
   );
